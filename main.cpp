@@ -35,6 +35,8 @@ int main(){
 
     std::vector<Triangles*> triangles;
     triangles.push_back(new Triangles(bird));
+    triangles.push_back(new Triangles(bird));
+    triangles.push_back(new Triangles(bird));
 
     while(window.isOpen()){
         text.setString(std::to_string(bird->points));
@@ -51,6 +53,8 @@ int main(){
 
             }
         }
+        if(bird->pos.y > 1500)
+            window.close();
         bird->gravity();
         bird->boundaries_collision();
         bird->after_death();
@@ -61,6 +65,7 @@ int main(){
         for(int t = 0; t<triangles.size();t++){
             triangles[t]->update(bounce,bird->points,triangles);
             triangles[t]->generate(spikes);
+            bird->spikes_collision(triangles[t]->spike_pos);
         }
         window.draw(background);
         window.draw(spikes);

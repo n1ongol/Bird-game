@@ -43,9 +43,10 @@ void Triangles::generate(sf::VertexArray& spikes){
 void Triangles::update(bool& bounce, int& points, std::vector<Triangles*>& triangles){
 
     if(bounce != this->bird->right){
-        this->spike_pos.y = rand()%500+50;    
+        this->spike_pos.y = rand()%500+50;  
         bounce = this->bird->right;
         points++;
-        triangles.push_back(new Triangles(this->bird));
+        if(points%5==0)
+            triangles.push_back(new Triangles(this->bird));
     }
 }

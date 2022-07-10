@@ -39,9 +39,9 @@ void Bird::boundaries_collision(){
     if(this->living){
         if(this->pos.x >= 550 || this->pos.x <= 250){
             if(this->vel.x < 0)
-                this->vel.x -= 0.001;
+                this->vel.x -= 0.005;
             else
-                this->vel.x += 0.001;
+                this->vel.x += 0.005;
             this->vel.x *= -1;
             this->sprite.scale(-1.f,1.f);
             this->right = !this->right;
@@ -51,9 +51,15 @@ void Bird::boundaries_collision(){
     }
 }
 
+void Bird::spikes_collision(sf::Vector2f spike_pos){
+
+    if(sqrt(pow(spike_pos.x - this->pos.x, 2) + pow(spike_pos.y - this->pos.y, 2)) - this->r <= 0)
+        this->living = false;
+}
+
 void Bird::after_death(){
     if(!this->living){
         this->vel *= 0.9999f;
-        this->sprite.rotate(5.0);
+        this->sprite.rotate(0.1);
     }
 }

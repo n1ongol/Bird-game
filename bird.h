@@ -13,7 +13,7 @@ class Bird{
         sf::Vector2f pos  = sf::Vector2f(280,50);
         sf::Vector2f force = sf::Vector2f(0.5,0);
         sf::Vector2f vel = VECTOR_ZERO;
-        float        r    = 30,
+        float        r    = 20,
                      mass = 10;
         int          points = 1;
         bool         living = true,
@@ -32,6 +32,7 @@ class Bird{
         void rotation_handling();
         void boundaries_collision();
         void after_death();
+        void spikes_collision(sf::Vector2f spike_pos);
 
 };
 
